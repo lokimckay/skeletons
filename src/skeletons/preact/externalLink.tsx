@@ -9,8 +9,8 @@ interface ExternalLink extends JSX.HTMLAttributes<HTMLAnchorElement> {
 export default function ExternalLink({
   className,
   width = 16,
-  href = "https://google.com",
-  label = "google.com",
+  href = "https://ltm.bio",
+  label = "ltm.bio",
   ...rest
 }: ExternalLink) {
   return (
