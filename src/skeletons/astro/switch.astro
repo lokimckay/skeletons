@@ -1,0 +1,42 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import "~/css/switch.css";
+
+interface Props extends HTMLAttributes<"input"> {
+  label?: string;
+}
+
+const { id = "my-switch", label, ...rest } = Astro.props;
+---
+
+<div class="switch">
+  {label && <label for={id}>{label}</label>}
+  <button>
+    <div class="track">
+      <input type="checkbox" id={id} {...rest} />
+      <span class="knob"></span>
+    </div>
+  </button>
+</div>
+
+<script>
+  function onClick(event: Event) {
+    const input = (event.currentTarget as HTMLButtonElement).querySelector(
+      "input"
+    )!;
+    const newState = !input.checked;
+    input.checked = newState;
+    input.value = newState.toString();
+  }
+
+  function init() {
+    const switches = document.querySelectorAll(".switch button");
+    for (const button of switches) {
+      button.addEventListener("click", onClick);
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", init);
+  document.addEventListener("astro:after-swap", init);
+  document.addEventListener("astro:page-load", init);
+</script>

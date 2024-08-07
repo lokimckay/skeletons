@@ -1,0 +1,26 @@
+---
+import Select from "@/skeletons/astro/select.astro";
+---
+
+<Select id="framework" label="Framework" options={["Astro", "Preact"]} />
+
+<script>
+  function onChange(event: Event) {
+    document.documentElement.setAttribute(
+      "data-framework",
+      (event.target as HTMLSelectElement).value.toLowerCase()
+    );
+  }
+
+  function init() {
+    const select = document.getElementById("framework") as HTMLSelectElement;
+    select.addEventListener("change", onChange);
+    onChange({ target: select } as unknown as Event);
+  }
+
+  $: {
+    document.addEventListener("DOMContentLoaded", init);
+    document.addEventListener("astro:after-swap", init);
+    document.addEventListener("astro:page-load", init);
+  }
+</script>

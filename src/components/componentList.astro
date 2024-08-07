@@ -1,0 +1,23 @@
+---
+import AstroSingle from "@/components/astroSingle.astro";
+import type { ComponentEntry } from "@/lib/types";
+
+interface Props {
+  components: ComponentEntry[];
+}
+
+const { components } = Astro.props;
+---
+
+<ul class="components">
+  {
+    components.map(({ slug, name }) => {
+      return (
+        <li>
+          <a href={`./${slug}`}>{name}</a>
+          <AstroSingle slug={slug} />
+        </li>
+      );
+    })
+  }
+</ul>

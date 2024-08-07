@@ -1,0 +1,15 @@
+---
+import type { ComponentEntry } from "@/lib/types";
+import { getComponents } from "@/lib/components";
+import ComponentList from "@/components/componentList.astro";
+import "./all.css";
+
+const components = await getComponents();
+const bases: ComponentEntry[] = components.filter((c) => !c.isDerivative);
+const derivatives: ComponentEntry[] = components.filter((c) => c.isDerivative);
+---
+
+<h2>Bases</h2>
+<ComponentList components={bases} />
+<h2>Derivatives</h2>
+<ComponentList components={derivatives} />

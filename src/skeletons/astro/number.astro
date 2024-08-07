@@ -1,0 +1,12 @@
+---
+// derivative of <Input />
+// https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/number
+import type { HTMLAttributes } from "astro/types";
+import Input from "./input.astro";
+
+interface Props extends HTMLAttributes<"input"> {
+  label?: string;
+}
+---
+
+<Input label="Count: " type="number" {...Astro.props} />

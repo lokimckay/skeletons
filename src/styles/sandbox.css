@@ -1,0 +1,27 @@
+.sandbox {
+  border: 1px dotted rgba(0, 0, 0, 0.2);
+  padding: 1em;
+}
+
+.sandbox > div {
+  display: inline-grid;
+  grid-template-columns: auto 1fr;
+  gap: 1em;
+  align-items: center;
+}
+
+html.dark .sandbox {
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.sandbox .component,
+.snippet {
+  display: none;
+}
+
+html[data-framework="preact"] .sandbox .component.preact,
+html[data-framework="preact"] .snippet.preact,
+html[data-framework="astro"] .sandbox .component.astro,
+html[data-framework="astro"] .snippet.astro {
+  display: initial;
+}

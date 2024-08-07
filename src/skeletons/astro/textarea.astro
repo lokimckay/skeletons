@@ -1,0 +1,15 @@
+---
+// https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends HTMLAttributes<"textarea"> {
+  label?: string;
+}
+
+const { id = "my-textarea", label, ...rest } = Astro.props;
+---
+
+<div class="textarea">
+  {label && <label for={id}>{label}</label>}
+  <textarea id={id} {...rest}></textarea>
+</div>

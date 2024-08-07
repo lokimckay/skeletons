@@ -1,0 +1,15 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import "~/css/badge.css";
+
+interface Props extends HTMLAttributes<"span"> {
+  label: string;
+  color?: string;
+}
+
+const { label = "badge", color } = Astro.props;
+---
+
+<span class="badge" style={color ? `--bg-color: ${color}` : {}}>
+  {label}
+</span>

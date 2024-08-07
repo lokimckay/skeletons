@@ -1,0 +1,49 @@
+@import "./colors.css";
+@import "./nav.css";
+@import "./sandbox.css";
+
+:root {
+  --body-font: system-ui, sans-serif;
+  --code-font: Consolas, ui-monospace, monospace;
+  --page-padding: 1em;
+  --border-radius: 0.2em;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: var(--page-padding);
+  padding-bottom: 10em;
+  font-family: var(--body-font);
+}
+
+main,
+nav,
+article {
+  margin: auto;
+  width: 40rem;
+}
+
+button {
+  cursor: pointer;
+}
+
+code {
+  font-family: var(--code-font);
+}
+.astro-code {
+  padding: 1em;
+}
+
+ul.unstyled,
+ol.unstyled,
+ul.contains-task-list,
+nav ul,
+nav ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}

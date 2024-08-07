@@ -1,0 +1,39 @@
+---
+import Base from "@/layouts/base.astro";
+import { getComponents } from "@/lib/components";
+import PreactSingle from "@/components/preactSingle";
+import AstroSingle from "@/components/astroSingle.astro";
+import { Code } from "astro:components";
+import upperFirst from "lodash.upperfirst";
+
+export async function getStaticPaths() {
+  const components = await getComponents();
+  return components.map((props) => {
+    const { slug } = props;
+    return {
+      params: { component: slug },
+      props,
+    };
+  });
+}
+
+const { name, slug, astro, tsx, css } = Astro.props;
+---
+
+<Base>
+  <h1>{name}</h1>
+  <div class="sandbox">
+    <PreactSingle client:only="preact" name={upperFirst(slug)} />
+    <AstroSingle slug={slug} />
+  </div>
+  <div class="snippet astro">
+    {astro && css && <h2>{slug}.astro</h2>}
+    {astro && <Code code={astro} lang="astro" theme="night-owl" />}
+  </div>
+  <div class="snippet preact">
+    {tsx && css && <h2>{slug}.tsx</h2>}
+    {tsx && <Code code={tsx} lang="tsx" theme="night-owl" />}
+  </div>
+  {css && <h2>{slug}.css</h2>}
+  {css && <Code code={css} lang="css" theme="night-owl" />}
+</Base>

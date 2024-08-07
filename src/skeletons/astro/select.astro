@@ -1,0 +1,34 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+type Option = { value: string; label: string };
+interface Props extends HTMLAttributes<"select"> {
+  options?: string[] | Option[];
+  label?: string;
+}
+
+const {
+  id = "my-select",
+  options = ["Option 1", "Option 2", "Option 3"],
+  label,
+  value,
+  ...rest
+} = Astro.props;
+
+const opts = (
+  typeof options[0] === "string"
+    ? (options as string[]).map((opt) => ({ value: opt, label: opt }))
+    : options
+) as Option[];
+---
+
+<div class="select">
+  {label && <label for={id}>{label}</label>}
+  <select id={id} value={value} {...rest}>
+    {
+      opts.map(({ value, label: optionLabel }) => (
+        <option value={value}>{optionLabel}</option>
+      ))
+    }
+  </select>
+</div>

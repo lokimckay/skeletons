@@ -1,0 +1,71 @@
+.switch {
+  --padding: 0.5em;
+  --width: 100%;
+  --height: 2em;
+  --knob-width: 1em;
+  --knob-height: 1em;
+
+  --accent: #007bff;
+  --accent-lighter: #4dabf7;
+  --mid: #6c757d;
+  --lighter: #a0a0a0;
+  --lightest: #fff;
+}
+
+.switch button {
+  position: relative;
+  display: inline-block;
+  border: none;
+  background-color: transparent;
+  padding: 0;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.switch .track {
+  position: relative;
+  height: var(--height, auto);
+  min-width: 3.5em;
+  max-width: var(--width, 3.5em);
+}
+
+.knob {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--mid);
+  border: 2px solid var(--lighter);
+  border-radius: var(--knob-width);
+}
+
+.knob:before {
+  position: absolute;
+  content: "";
+  width: var(--knob-width);
+  height: var(--knob-height);
+  left: var(--padding);
+  bottom: 50%;
+  transform: translateY(50%);
+  background-color: var(--lightest);
+  border-radius: 50%;
+}
+
+.switch input:checked + .knob {
+  background-color: var(--accent);
+  border-color: var(--accent-lighter);
+}
+.switch input:focus + .knob {
+  box-shadow: 0 0 0.5em var(--accent);
+}
+
+.switch input:checked + .knob:before {
+  left: auto;
+  right: var(--padding);
+}

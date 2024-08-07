@@ -1,0 +1,13 @@
+---
+interface Props {
+  slug: string;
+}
+
+const { slug } = Astro.props;
+if (!slug) return;
+const Component = (await import(`../skeletons/astro/${slug}.astro`)).default;
+---
+
+<div class="component astro">
+  <Component />
+</div>
