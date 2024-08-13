@@ -7,6 +7,13 @@ interface Props {
 
 export default function PreactSingle({ component, name }: Props) {
   const _component = component || (components as any)[name!];
-  if (typeof _component !== "function") return <div>Component not found</div>;
-  return <div class="component preact">{_component({})}</div>;
+  return (
+    <div class="component preact">
+      {typeof _component === "function" ? (
+        _component({})
+      ) : (
+        <>Component not found</>
+      )}
+    </div>
+  );
 }

@@ -1,0 +1,47 @@
+---
+// https://www.w3schools.com/howto/howto_js_dropdown.asp
+import type { HTMLAttributes } from "astro/types";
+import "~/css/dropdown.css";
+
+interface Props extends HTMLAttributes<"div"> {}
+const { class: className, ...props } = Astro.props;
+---
+
+<div class:list={["dropdown", className]} {...props}>
+  <button class="dropdown-btn">
+    <slot name="button">Dropdown</slot>
+  </button>
+  <div class="dropdown-content">
+    <slot name="content">
+      <a>Link 1</a>
+      <a>Link 2</a>
+      <a>Link 3</a>
+    </slot>
+  </div>
+</div>
+
+<script>
+  function init() {
+    const dropdowns = document.querySelectorAll(".dropdown");
+
+    for (const dropdown of dropdowns) {
+      const button = dropdown.querySelector(".dropdown-btn");
+      const content = dropdown.querySelector(".dropdown-content");
+      if (!button || !content) continue;
+
+      button.addEventListener("click", () => {
+        content.classList.toggle("show");
+      });
+
+      document.addEventListener("click", (event) => {
+        const target = event.target as HTMLElement;
+        if (!dropdown.contains(target)) {
+          content.classList.remove("show");
+        }
+      });
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", init);
+  document.addEventListener("astro:after-swap", init);
+</script>

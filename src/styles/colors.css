@@ -5,6 +5,8 @@
   --link: #016eda;
   --link-hover: #1c74dc;
   --link-visited: #9c69ff;
+
+  --body-color: var(--darkest);
 }
 
 html {
@@ -15,4 +17,6 @@ html {
 html.dark {
   background: var(--darkest);
   color: var(--lightest);
+
+  --body-color: var(--lightest);
 }

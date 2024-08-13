@@ -1,0 +1,38 @@
+---
+// Inlines SVG files from the public/img directory
+import { parse } from "node-html-parser";
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends HTMLAttributes<"svg"> {
+  name: string;
+  basepath?: string;
+}
+
+async function getSVG(name: string = "user-circle") {
+  if (!name) return {};
+  const filepath = `/public/img/${name}.svg`;
+  const files = import.meta.glob<string>("/public/img/**/*.svg", {
+    query: "?raw",
+    import: "default",
+  });
+
+  if (!(filepath in files)) {
+    throw new Error(`${filepath} not found`);
+  }
+
+  const content = await files[filepath]();
+  const root = parse(content);
+  const svg = root.querySelector("svg");
+  const { attributes, innerHTML } = svg || {};
+
+  return {
+    attributes,
+    innerHTML,
+  };
+}
+
+const { name, ...rest } = Astro.props as Props;
+const { attributes, innerHTML } = await getSVG(name);
+---
+
+<svg width="2.5em" {...attributes} {...rest} set:html={innerHTML} />

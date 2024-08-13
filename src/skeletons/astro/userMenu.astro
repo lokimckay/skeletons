@@ -1,0 +1,19 @@
+---
+// derivative of <Dropdown /> and <SVG />
+import type { HTMLAttributes } from "astro/types";
+import Dropdown from "./dropdown.astro";
+import SVG from "./svg.astro";
+import "~/css/userMenu.css";
+
+interface Props extends HTMLAttributes<"div"> {}
+const { class: className, ...props } = Astro.props;
+---
+
+<Dropdown class:list={["user-menu", className]} style="--right: 0;" {...props}>
+  <SVG name="user-circle" slot="button" />
+  <div slot="content">
+    <a href="/profile">Profile</a>
+    <a href="/settings">Settings</a>
+    <a href="/logout">Logout</a>
+  </div>
+</Dropdown>

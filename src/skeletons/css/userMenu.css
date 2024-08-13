@@ -1,0 +1,10 @@
+.dropdown.user-menu .dropdown-btn {
+  color: var(--body-color, #fff);
+  background-color: transparent;
+  padding: 0;
+}
+
+.dropdown.user-menu .dropdown-content {
+  float: right;
+  right: var(--right, auto);
+}
